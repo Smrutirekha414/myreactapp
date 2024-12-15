@@ -1,0 +1,41 @@
+
+.side-menu {
+    width: 200px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+  }
+  
+  .side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .side-menu li {
+    padding: 10px 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .side-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+  }
+  
+  .side-menu li:hover {
+    background-color: #dcdcdd;
+    color: #fff;
+  }
+  
+  
+  

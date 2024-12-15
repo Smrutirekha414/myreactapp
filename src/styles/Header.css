@@ -1,0 +1,31 @@
+.header {
+    margin: 0px;
+    background-color: rgb(210, 20, 20);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .app-name {
+    font-size: 1.5em;
+    font-weight: 300px;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+  }
+  
+  .search-btn {
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .country-dropdown {
+    padding: 5px;
+  }
+  
