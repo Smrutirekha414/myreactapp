@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/Main.css';
-import download from '../images/download.jpg'
 import Meetings from './Meetings';
+import Home from './Home';
 
 const Main = () => {
 
@@ -12,12 +12,7 @@ const Main = () => {
   console.log('Current Route:', route);
 
     const content = {
-      home:  (
-        <div>
-          <h1>Welcome to the Home Page</h1>
-          <img src={download} alt="Home" style={{ width: '100%', height: 'auto' }} />
-        </div>
-      ),
+      home:  <Home />,
       meetings: <Meetings />,
       meals: (
         <div>

@@ -1,23 +1,30 @@
-import React, { useState } from "react";
-import '../styles/Meetings.css'
+import React, { useState, useEffect } from "react";
+import "../styles/Meetings.css";
 
 const Meetings = () => {
 
-  const [meetings, setMeetings] = useState([
-    { id: 1, title: "Project Kickoff", date: "2024-12-12" },
-    { id: 2, title: "Team Standup", date: "2024-12-13" },
-  ]);
-
+  const [meetings, setMeetings] = useState([]);
   const [formData, setFormData] = useState({ id: null, title: "", date: "" });
-
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const storedMeetings = JSON.parse(localStorage.getItem("meetings")) || [];
+    const formattedMeetings = storedMeetings.map((meeting) => ({
+      ...meeting,
+      date: meeting.date || "",
+    }));
+    setMeetings(formattedMeetings);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("meetings", JSON.stringify(meetings));
+  }, [meetings]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Add or Edit meeting
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEditing) {
@@ -32,18 +39,15 @@ const Meetings = () => {
     resetForm();
   };
 
-  // Delete meeting
   const handleDelete = (id) => {
     setMeetings(meetings.filter((meeting) => meeting.id !== id));
   };
 
-  // Reset form and toggle state
   const resetForm = () => {
-    setFormData({ id: null, title: "", date: "" });
+    setFormData({ id: null, title: "", date: "", time: "" });
     setIsEditing(false);
   };
 
-  // Open edit form
   const handleEdit = (meeting) => {
     setFormData(meeting);
     setIsEditing(true);
@@ -68,12 +72,10 @@ const Meetings = () => {
           onChange={handleChange}
           required
         />
-
         <button type="submit">{isEditing ? "Update" : "Add"} Meeting</button>
-        {isEditing && <button onClick={resetForm}>Cancel</button>}
+        {isEditing && <button type="button" className="cancel" onClick={resetForm}>Cancel</button>}
       </form>
 
-      {/* Meetings Table */}
       <table>
         <thead>
           <tr>
@@ -89,10 +91,15 @@ const Meetings = () => {
               <td>{meeting.date}</td>
               <td>
                 <button onClick={() => handleEdit(meeting)}>Edit</button>
-                <button onClick={() => handleDelete(meeting.id)}>Delete</button>
+                <button className="delete" onClick={() => handleDelete(meeting.id)}>Delete</button>
               </td>
             </tr>
           ))}
+          {meetings.length === 0 && (
+            <tr>
+              <td colSpan="4" style={{ textAlign: "center" }}>No Meetings Scheduled</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

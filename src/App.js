@@ -17,7 +17,7 @@ const App = () => {
      <SideMenu />
           <div className="main-wrapper">
           <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<Main />} />
             <Route path="/meetings" element={<Main />} />
             <Route path="/meals" element={<Main />} />
             <Route path="/faqs" element={<Main />} />
